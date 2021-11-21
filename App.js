@@ -8,6 +8,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+
 
 export default function App() {
   const Stack = createStackNavigator();
