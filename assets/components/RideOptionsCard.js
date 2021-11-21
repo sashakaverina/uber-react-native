@@ -5,6 +5,8 @@ import { Icon } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import tw from 'tailwind-react-native-classnames';
 import { useState } from 'react';
+import { selectTravelTimeInformation } from '../../slices/navSlice';
+import { useSelector } from 'react-redux';
 
 const data = [
   {
@@ -26,13 +28,15 @@ const data = [
     image: "http://links.papareact.com/7pf",
   }
 ]
+const SURGE_CHARGE_RATE = 2;
 
 const RideOptionsCard = () => {
   const navigation = useNavigation();
   const [selected, setSelected] = useState(null);
+  const travelTimeInformation = useSelector(selectTravelTimeInformation);
 
   return (
-   <SafeAreaView style={tw `bg-white flex-grow`}>
+   <SafeAreaView style={tw `bg-white`}>
      <View>
        <TouchableOpacity 
         onPress={ () => navigation.navigate("NavigateCard")}
@@ -40,14 +44,14 @@ const RideOptionsCard = () => {
          <Icon name="chevron-left" type="fontawesome"/>
        </TouchableOpacity>
      </View>
-     <Text style={tw `text-center py-5 text-xl`}>Select a ride</Text>
+     <Text style={tw `text-center py-5 text-xl`}>Select a ride - {travelTimeInformation?.distance.text}</Text>
      <FlatList
        data={data}
        keyExtractor={(item) => item.id}
        renderItem={({ item: {id, title, multiplier, image}, item }) => (
          <TouchableOpacity 
          onPress={() => setSelected(item)}
-         style={tw `flex-row justify-between items-center px-10 ${id === selected.id && "bg-gray-200"}`}>
+         style={tw `flex-row justify-between items-center px-10 ${id === selected?.id && "bg-gray-200"}`}>
              <Image
                style={{
                width: 70,
@@ -58,9 +62,16 @@ const RideOptionsCard = () => {
              />
              <View style={tw `-ml-6`}>
                <Text style={tw `text-xl font-semibold`}>{title}</Text>
-               <Text>Travel time</Text>
+               <Text>Travel time: {travelTimeInformation?.duration.text}</Text>
              </View>
-             <Text style={tw `text-xl`}>$99</Text>
+             <Text style={tw `text-xl`}>
+               {new Intl.NumberFormat('en-jp', {
+                 style: 'currency',
+                 currency: "JPY",
+               }).format (
+                (travelTimeInformation?.duration.value * SURGE_CHARGE_RATE * multiplier)
+               )}
+             </Text>
          </TouchableOpacity>
        )}
      />
