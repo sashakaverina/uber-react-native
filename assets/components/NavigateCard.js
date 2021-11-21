@@ -33,7 +33,7 @@ const NavigateCard = () => {
                description: data.description,
              })
              );
-             navigation.navigate('RideOptionsCard')
+            
            }}
            query={{
              key: GOOGLE_MAPS_APIKEY,
