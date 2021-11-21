@@ -1,12 +1,13 @@
 import React from 'react'
 import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native'
 import tw from 'tailwind-react-native-classnames';
+import NavOptions from '../assets/components/NavOptions';
 
 
 const HomeScreen = () => {
   return (
     <SafeAreaView style={tw `bg-white h-full`}>
-      <View style={tw `p-3`}>
+      <View style={tw `p-5`}>
         <Image 
           style={{
             width: 100,
@@ -15,6 +16,8 @@ const HomeScreen = () => {
           }}
           source={require('../assets/logo.png')}
             />
+
+          <NavOptions/>
       </View>
     </SafeAreaView>
   )
