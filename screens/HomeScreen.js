@@ -6,7 +6,7 @@ import NavOptions from '../assets/components/NavOptions';
 import { GOOGLE_MAPS_APIKEY } from '@env';
 import { useDispatch } from 'react-redux';
 import { setDestination, setOrigin } from '../slices/navSlice';
-import NavFavorites from '../assets/components/NavFavorite';
+import NavFavorites from '../assets/components/NavFavorites';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();

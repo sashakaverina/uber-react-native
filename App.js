@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
 import HomeScreen from './screens/HomeScreen';
 import MapScreen from './screens/MapScreen';
@@ -9,7 +9,7 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-
+import { KeyboardAvoidingView } from 'react-native';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -17,6 +17,12 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <SafeAreaProvider>
+          <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior={Platform.OS === 'ios' ? "padding" : "height"} 
+            
+            >
+           
           <Stack.Navigator>
             <Stack.Screen 
               name="HomeScreen"
@@ -35,6 +41,8 @@ export default function App() {
 
           </Stack.Navigator>
           
+          </KeyboardAvoidingView>
+    
         </SafeAreaProvider> 
       </NavigationContainer>
        
